@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { Usuario } from 'src/app/models/usuario';
 
 @Component({
@@ -10,8 +12,9 @@ import { Usuario } from 'src/app/models/usuario';
 export class LoginComponent implements OnInit {
 
   login: FormGroup;
+  loading= false;
 
-  constructor(private fb: FormBuilder) { 
+  constructor(private fb: FormBuilder, private toastr: ToastrService, private router:Router) { 
     this.login= this.fb.group({
       usuario: ['', Validators.required],
       password: ['', Validators.required]
@@ -30,6 +33,20 @@ export class LoginComponent implements OnInit {
       password: this.login.value.password
     }
 
+    this.loading=true;
+
+    setTimeout( () => {
+      if(usuario.nombreUsuario=== 'truzdiaz' && usuario.password==='admin123'){
+        this.login.reset();
+        this.router.navigate(['/dashboard']);
+      }else{
+        this.toastr.error('Usuario o contraseña invalidos', 'Error');
+        this.login.reset();
+      }
+      this.loading=false;
+    }, 3000);
+
+   
     console.log(usuario);
   }
 

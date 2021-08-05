@@ -4,3 +4,16 @@
     justify-content: center;
     align-items: center;
 }
+
+h3{
+    font-family: 'Rowdies', cursive;
+}
+
+.marg2{
+    margin-right: 17px;
+    background-color: #F05F44;
+    border-color: #F05F44;
+}
+.marg3{
+    margin-top: 20px;
+}
